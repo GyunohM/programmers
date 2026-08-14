@@ -1,35 +1,31 @@
 import java.util.*;
 
 class Solution {
-    //문자열 "AEIOU"생성
+    // 탐색할 모음 배열과 결과를 담을 리스트
     String str = "AEIOU";
-    
-    //정렬한 단어를 저장할 arraylist
     ArrayList<String> arr = new ArrayList<>();
-    
-    //메인 메서드
+
     public int solution(String word) {       
         permutation("");
-    
-        return arr.indexOf(word) + 1;
         
+        // indexOf는 0부터 시작하므로 +1을 하여 순서를 반환
+        return arr.indexOf(word) + 1;
     }
-    
-    //중복 정렬 재귀 메서드
-    public void permutation(String current){
-        //액션조건
-        if(!current.equals("")){
+
+    public void permutation(String current) {
+        // 1. 액션: 빈 문자열이 아닐 때만 완성된 단어로 취급하여 저장
+        if (!current.equals("")) {
             arr.add(current);
         }
-        //종료조건
-        if(current.length() == str.length()){
+        
+        // 2. 종료 조건: 단어의 최대 길이인 5(str.length())에 도달하면 가지치기
+        if (current.length() == str.length()) {
             return;
         }
-        
-        //재귀 반복
-        for(int i=0; i<str.length(); i++){
+
+        // 3. 재귀 반복: A, E, I, O, U 순서대로 글자를 붙여가며 DFS 탐색
+        for (int i = 0; i < str.length(); i++) {
             permutation(current + str.charAt(i));
-                }
+        }
     }
 }
-                
